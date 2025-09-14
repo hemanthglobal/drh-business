@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Target, Shield, Building2, ShoppingBag, Cpu, Banknote, Truck, Zap } from 'lucide-react';
+import { ArrowRight, Users, Target, Shield, Building2, ShoppingBag, Cpu, Banknote, Truck, Zap, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import { Navigation } from '@/components/ui/navigation';
 import { Footer } from '@/components/ui/footer';
 import heroImage from '@/assets/hero-image.jpg';
@@ -85,6 +86,65 @@ const Index = () => {
       icon: Target,
     },
   ];
+
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      title: "CEO, TechFlow Solutions",
+      company: "Technology",
+      content: "DRH's strategic consulting transformed our operational efficiency by 40%. Their team's expertise in scaling technology companies is unmatched.",
+      rating: 5
+    },
+    {
+      name: "Michael Rodriguez",
+      title: "CFO, GreenLogistics Inc",
+      company: "Logistics & Supply Chain",
+      content: "The financial planning and tax advisory services provided by DRH helped us navigate complex regulations while optimizing our cost structure.",
+      rating: 5
+    },
+    {
+      name: "Priya Sharma",
+      title: "Founder, EcoRetail",
+      company: "E-commerce & Retail",
+      content: "Working with DRH was a game-changer for our startup. Their inclusive approach and comprehensive managed services accelerated our growth beyond expectations.",
+      rating: 5
+    },
+    {
+      name: "David Thompson",
+      title: "Operations Director, ManufacturePro",
+      company: "Manufacturing",
+      content: "DRH's process optimization strategies streamlined our operations and significantly reduced overhead costs while maintaining quality standards.",
+      rating: 5
+    },
+    {
+      name: "Aisha Patel",
+      title: "VP Finance, FinSecure Bank",
+      company: "BFSI",
+      content: "Their compliance-first approach and deep understanding of financial regulations made our digital transformation smooth and risk-free.",
+      rating: 5
+    },
+    {
+      name: "James Wilson",
+      title: "Founder, StartupHub",
+      company: "Startups & MSMEs",
+      content: "DRH's team provided exactly what we needed as a growing startup - strategic guidance, operational excellence, and practical solutions within our budget.",
+      rating: 5
+    }
+  ];
+
+  const [api, setApi] = React.useState<CarouselApi>()
+
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    const interval = setInterval(() => {
+      api.scrollNext()
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [api])
 
   return (
     <div className="min-h-screen bg-background">
@@ -286,6 +346,62 @@ const Index = () => {
               </Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              What Our Clients Say
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Trusted by industry leaders across diverse sectors for transformative business solutions.
+            </p>
+          </div>
+          
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3">
+                  <Card className="h-full">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center space-x-1 mb-3">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                        ))}
+                      </div>
+                      <CardDescription className="text-base leading-relaxed">
+                        "{testimonial.content}"
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+                          <span className="text-primary-foreground font-semibold text-lg">
+                            {testimonial.name.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <CardTitle className="text-sm font-semibold">{testimonial.name}</CardTitle>
+                          <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+                          <p className="text-xs text-primary font-medium">{testimonial.company}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </section>
 
