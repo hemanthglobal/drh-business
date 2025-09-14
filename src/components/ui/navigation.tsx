@@ -49,7 +49,7 @@ export function Navigation() {
     )}>
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-foreground">
+        <Link to="/" className="text-2xl font-bold text-white bg-foreground px-3 py-1 rounded-lg">
           DRH
         </Link>
 
