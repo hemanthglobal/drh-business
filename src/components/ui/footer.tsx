@@ -9,12 +9,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">D</span>
-              </div>
-              <span className="text-lg font-bold text-foreground">DRH</span>
-            </div>
+            <Link to="/" className="text-lg font-bold text-white bg-foreground px-3 py-1 rounded-lg">
+              DRH
+            </Link>
             <p className="text-sm text-muted-foreground">
               Empowering businesses through strategic consulting, finance solutions, and managed services.
             </p>
