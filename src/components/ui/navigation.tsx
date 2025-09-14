@@ -48,6 +48,11 @@ export function Navigation() {
       isScrolled ? 'h-16' : 'h-20'
     )}>
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-foreground">
+          DRH
+        </Link>
+
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link
